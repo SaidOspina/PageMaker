@@ -1,4 +1,56 @@
-<a href="#" style="color: white; margin: 0 10px; text-decoration: none;">Facebook</a>
+// Variables globales
+let selectedElement = null;
+let canvas = document.getElementById('canvas');
+let dropZone = document.getElementById('dropZone');
+let draggedElement = null;
+let history = [];
+let historyStep = -1;
+let elementCounter = 0;
+
+// Plantillas predefinidas
+const templates = {
+    landing: `
+        <div class="canvas-element container" data-element-type="container" data-element-id="container_1">
+            <div class="element-controls">
+                <button class="control-btn" onclick="editElement(this)" title="Editar">✏️</button>
+                <button class="control-btn" onclick="duplicateElement(this)" title="Duplicar">📋</button>
+                <button class="control-btn" onclick="deleteElement(this)" title="Eliminar">🗑️</button>
+            </div>
+            <header style="background: #2c3e50; color: white; padding: 20px; text-align: center;">
+                <h1>Mi Sitio Web</h1>
+                <nav style="margin-top: 20px;">
+                    <a href="#inicio" style="color: white; margin: 0 15px; text-decoration: none;">Inicio</a>
+                    <a href="#servicios" style="color: white; margin: 0 15px; text-decoration: none;">Servicios</a>
+                    <a href="#contacto" style="color: white; margin: 0 15px; text-decoration: none;">Contacto</a>
+                </nav>
+            </header>
+            <div class="nested-elements">
+                <section style="padding: 60px 20px; text-align: center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                    <h2 style="font-size: 3rem; margin-bottom: 20px;">Bienvenido a Nuestro Sitio</h2>
+                    <p style="font-size: 1.2rem; margin-bottom: 30px;">Creamos soluciones web increíbles para tu negocio</p>
+                    <button style="background: #e74c3c; color: white; padding: 15px 30px; border: none; border-radius: 5px; font-size: 1.1rem; cursor: pointer;">Comenzar Ahora</button>
+                </section>
+                <section style="padding: 60px 20px; background: #f8f9fa;">
+                    <h2 style="text-align: center; margin-bottom: 40px; color: #2c3e50;">Nuestros Servicios</h2>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto;">
+                        <div style="background: white; padding: 30px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); text-align: center;">
+                            <h3 style="color: #3498db; margin-bottom: 15px;">Desarrollo Web</h3>
+                            <p>Creamos sitios web modernos y responsivos</p>
+                        </div>
+                        <div style="background: white; padding: 30px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); text-align: center;">
+                            <h3 style="color: #3498db; margin-bottom: 15px;">Diseño UX/UI</h3>
+                            <p>Interfaces atractivas y fáciles de usar</p>
+                        </div>
+                        <div style="background: white; padding: 30px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); text-align: center;">
+                            <h3 style="color: #3498db; margin-bottom: 15px;">SEO</h3>
+                            <p>Optimización para motores de búsqueda</p>
+                        </div>
+                    </div>
+                </section>
+                <footer style="background: #34495e; color: white; padding: 40px 20px; text-align: center;">
+                    <p>&copy; 2024 Mi Sitio Web. Todos los derechos reservados.</p>
+                    <div style="margin-top: 20px;">
+                        <a href="#" style="color: white; margin: 0 10px; text-decoration: none;">Facebook</a>
                         <a href="#" style="color: white; margin: 0 10px; text-decoration: none;">Twitter</a>
                         <a href="#" style="color: white; margin: 0 10px; text-decoration: none;">LinkedIn</a>
                     </div>
@@ -1104,58 +1156,4 @@ function setupGlobalEventListeners() {
             }
         });
     });
-}// Variables globales
-let selectedElement = null;
-let canvas = document.getElementById('canvas');
-let dropZone = document.getElementById('dropZone');
-let draggedElement = null;
-let history = [];
-let historyStep = -1;
-let elementCounter = 0;
-
-// Plantillas predefinidas
-const templates = {
-    landing: `
-        <div class="canvas-element container" data-element-type="container" data-element-id="container_1">
-            <div class="element-controls">
-                <button class="control-btn" onclick="editElement(this)" title="Editar">✏️</button>
-                <button class="control-btn" onclick="duplicateElement(this)" title="Duplicar">📋</button>
-                <button class="control-btn" onclick="deleteElement(this)" title="Eliminar">🗑️</button>
-            </div>
-            <header style="background: #2c3e50; color: white; padding: 20px; text-align: center;">
-                <h1>Mi Sitio Web</h1>
-                <nav style="margin-top: 20px;">
-                    <a href="#inicio" style="color: white; margin: 0 15px; text-decoration: none;">Inicio</a>
-                    <a href="#servicios" style="color: white; margin: 0 15px; text-decoration: none;">Servicios</a>
-                    <a href="#contacto" style="color: white; margin: 0 15px; text-decoration: none;">Contacto</a>
-                </nav>
-            </header>
-            <div class="nested-elements">
-                <section style="padding: 60px 20px; text-align: center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
-                    <h2 style="font-size: 3rem; margin-bottom: 20px;">Bienvenido a Nuestro Sitio</h2>
-                    <p style="font-size: 1.2rem; margin-bottom: 30px;">Creamos soluciones web increíbles para tu negocio</p>
-                    <button style="background: #e74c3c; color: white; padding: 15px 30px; border: none; border-radius: 5px; font-size: 1.1rem; cursor: pointer;">Comenzar Ahora</button>
-                </section>
-                <section style="padding: 60px 20px; background: #f8f9fa;">
-                    <h2 style="text-align: center; margin-bottom: 40px; color: #2c3e50;">Nuestros Servicios</h2>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto;">
-                        <div style="background: white; padding: 30px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); text-align: center;">
-                            <h3 style="color: #3498db; margin-bottom: 15px;">Desarrollo Web</h3>
-                            <p>Creamos sitios web modernos y responsivos</p>
-                        </div>
-                        <div style="background: white; padding: 30px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); text-align: center;">
-                            <h3 style="color: #3498db; margin-bottom: 15px;">Diseño UX/UI</h3>
-                            <p>Interfaces atractivas y fáciles de usar</p>
-                        </div>
-                        <div style="background: white; padding: 30px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); text-align: center;">
-                            <h3 style="color: #3498db; margin-bottom: 15px;">SEO</h3>
-                            <p>Optimización para motores de búsqueda</p>
-                        </div>
-                    </div>
-                </section>
-                <footer style="background: #34495e; color: white; padding: 40px 20px; text-align: center;">
-                    <p>&copy; 2024 Mi Sitio Web. Todos los derechos reservados.</p>
-                    <div style="margin-top: 20px;">
-                        <a href="#" style="color: white; margin: 0 10px; text-decoration: none;">Facebook</a>
-                        <a href="#" style="color: white; margin: 0 10px; text-decoration: none;">Twitter</a>
-                        <a href="#" style="color: white; margin: 0 10px; text-decoration:
+}
